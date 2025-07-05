@@ -12,12 +12,34 @@ var grunt_playing: bool = false
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 @onready var debug_ray_cast_right: Line2D = $DebugRayCastRight
 @onready var debug_ray_cast_left: Line2D = $DebugRayCastLeft
+@onready var player_sprite: Sprite2D = $PlayerSprite
+
+var grunt_sounds: Array[AudioStreamWAV] = [
+	preload("res://grunts/grunting_1.wav"),
+	preload("res://grunts/grunting_2.wav"),
+	preload("res://grunts/grunting_3.wav"),
+	preload("res://grunts/grunting_4.wav"),
+	preload("res://grunts/grunting_5.wav"),
+	preload("res://grunts/grunting_6.wav"),
+	preload("res://grunts/grunting_7.wav"),
+	preload("res://grunts/grunting_8.wav"),
+	preload("res://grunts/grunting_9.wav"),
+	preload("res://grunts/grunting_10.wav"),
+	preload("res://grunts/grunting_11.wav"),
+	preload("res://grunts/grunting_12.wav"),
+	preload("res://grunts/grunting_13.wav"),
+	preload("res://grunts/grunting_14.wav"),
+	preload("res://grunts/grunting_15.wav"),
+	preload("res://grunts/grunting_16.wav"),
+	preload("res://grunts/grunting_17.wav"),
+	preload("res://grunts/grunting_18.wav"),
+	preload("res://grunts/grunting_19.wav"),
+	preload("res://grunts/grunting_20.wav"),
+]
+
 
 
 func _process(_delta:float) -> void:
-	
-	
-	
 	
 	if Engine.is_editor_hint():
 		return
@@ -37,7 +59,10 @@ func _process(_delta:float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		self.apply_central_force(Vector2.UP*jump_force * _delta)
 	
-	
+	if self.linear_velocity.x > 0:
+		player_sprite.flip_h = false
+	elif  self.linear_velocity.x < 0:
+		player_sprite.flip_h = true
 	
 	var should_play_grunt: bool = gruntPlayer and grunt_playing == false
 	should_play_grunt = should_play_grunt and (ray_cast_left.is_colliding() or ray_cast_right.is_colliding())
@@ -50,7 +75,7 @@ func _process(_delta:float) -> void:
 	
 
 func _on_audio_stream_player_finished() -> void:
-	print("Grunt Finished Playing")
+	gruntPlayer.stream = grunt_sounds[randi() % grunt_sounds.size()]
 	grunt_playing = false
 	pass # Replace with function body.
 
