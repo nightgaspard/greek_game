@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://hn2mlxel8o5k"]
+
+[ext_resource type="Texture2D" uid="uid://b2mr5hpm3vwar" path="res://player.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://divxbgrtavtx0" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="AudioStream" uid="uid://bu0qwode86n84" path="res://grunts/grunting_1.wav" id="3_i3pqv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
+radius = 85.0
+
+[node name="Player" type="RigidBody2D"]
+script = ExtResource("1_onrkg")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("1_4flbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_onrkg")
+
+[node name="GruntPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_i3pqv")
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-120, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+target_position = Vector2(120, 0)
+collision_mask = 2
+
+[node name="DebugRayCastRight" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 120, 0)
+default_color = Color(1, 0.172549, 0.223529, 1)
+
+[node name="DebugRayCastLeft" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, -120, 0)
+default_color = Color(1, 0.172549, 0.223529, 1)
+
+[connection signal="finished" from="GruntPlayer" to="." method="_on_audio_stream_player_finished"]
