@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://x6flnxymsvdv"]
+
+[ext_resource type="Texture2D" uid="uid://s5gtvui8tfli" path="res://art/flags/redflag.png" id="1_7u8od"]
+
+[node name="RedFlag" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(128, -60)
+texture = ExtResource("1_7u8od")
