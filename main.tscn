@@ -1,8 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://cuy6d4lmkmaka"]
+[gd_scene load_steps=10 format=3 uid="uid://cuy6d4lmkmaka"]
 
+[ext_resource type="PackedScene" uid="uid://ct744lcl31k43" path="res://yellow_flag.tscn" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://4colad6li6o" path="res://board.tscn" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://hn2mlxel8o5k" path="res://player.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://u7hdmbmymp8n" path="res://boulder.tscn" id="3_lquwl"]
+
+[sub_resource type="Gradient" id="Gradient_h2yge"]
+colors = PackedColorArray(0.0952, 0.44608, 0.68, 1, 0.3003, 0.808383, 0.91, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1bvp3"]
+gradient = SubResource("Gradient_h2yge")
+width = 1404
+height = 2560
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 normal = Vector2(1, 0)
@@ -13,18 +22,22 @@ normal = Vector2(-1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lquwl"]
 normal = Vector2(0, 1)
 
-[sub_resource type="Gradient" id="Gradient_h2yge"]
-colors = PackedColorArray(0.0952, 0.44608, 0.68, 1, 0.3003, 0.808383, 0.91, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1bvp3"]
-gradient = SubResource("Gradient_h2yge")
-width = 1404
-height = 2560
-
 [node name="Main" type="Node2D"]
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(1280, 702)
+rotation = 1.5708
+texture = SubResource("GradientTexture2D_1bvp3")
+
+[node name="YellowFlag" parent="." instance=ExtResource("1_1bvp3")]
+position = Vector2(864, 1271)
+
 [node name="Board" parent="." instance=ExtResource("1_h2yge")]
-position = Vector2(1280, 680)
+position = Vector2(1279, 686)
 
 [node name="Player" parent="." instance=ExtResource("2_1bvp3")]
 position = Vector2(121, 212)
@@ -61,12 +74,3 @@ metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaryTop"]
 shape = SubResource("WorldBoundaryShape2D_lquwl")
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(1280, 702)
-rotation = 1.5708
-texture = SubResource("GradientTexture2D_1bvp3")

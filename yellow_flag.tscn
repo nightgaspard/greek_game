@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct744lcl31k43"]
+
+[ext_resource type="Texture2D" uid="uid://dwiqlpkligkeu" path="res://art/flags/yellowflag.png" id="1_deaxo"]
+
+[node name="YellowFlag" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(56, -51)
+texture = ExtResource("1_deaxo")

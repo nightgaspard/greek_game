@@ -69,7 +69,7 @@ func _process(_delta:float) -> void:
 	
 	var should_play_grunt: bool = gruntPlayer and grunt_playing == false
 	should_play_grunt = should_play_grunt and (ray_cast_left.is_colliding() or ray_cast_right.is_colliding())
-	
+	should_play_grunt = should_play_grunt and (Input.is_action_pressed("right") or Input.is_action_pressed("left"))
 	if should_play_grunt:
 		gruntPlayer.play()
 		grunt_playing = true
